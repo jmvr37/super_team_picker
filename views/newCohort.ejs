@@ -1,18 +1,18 @@
 <%- include('./partials/header') %>
 
 
-<form action="/contact" method="POST">
+<form action="/cohorts" method="POST">
     <div class="mb-3">
       <label for="logo" class="form-label">Logo Url</label>
       <input name="logo" type="text" class="form-control" id="logo" placeholder="e.g. https://www.example.com/some.png" placeholder>
     </div>
     <div class="mb-3">
       <label for="Name" class="form-label">Name</label>
-      <input name="Name" class="form-control" id="Name" placeholder="Flying Funks"></input>
+      <input name="cohort_name" class="form-control" id="cohort_name" placeholder="Flying Funks"></input>
     </div>
     <div class="mb-3">
         <label for="Members" class="form-label">Members</label>
-        <textArea name="Members" class="form-control" id="Members" placeholder="Kevin Malone, Phillys Vance, Kelly Kapoor, Moose shrute "type="text"></textArea>
+        <textArea name="cohort_members" class="form-control" id="cohort_members" placeholder="Kevin Malone, Phillys Vance, Kelly Kapoor, Moose shrute "type="text"></textArea>
       </div>
     
     <button type="submit" class="btn btn-primary">Submit</button>
