@@ -21,8 +21,20 @@ app.get('/', (request, response) => {
 
 app.get('/newCohort', cohortsRouter)
 
-const PORT = 3000
-const ADDRESS = 'localhost'
+
+app.get("/newCohort", (request, response) => {
+    response.render("newCohort");
+  });
+
+app.get("/cohorts", (request, response) => {
+    response.render("cohorts");
+  });
+
+
+
+const PORT = 3000;
+const ADDRESS = "localhost";
+
 app.listen(PORT, ADDRESS, () => {
   console.log(`Server started at http://${ADDRESS}:${PORT}`)
 })
