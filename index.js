@@ -23,6 +23,10 @@ app.get("/newCohort", (request, response) => {
     response.render("newCohort");
   });
 
+app.get("/cohorts", (request, response) => {
+    response.render("cohorts");
+  });
+
 
 
 const PORT = 3000;

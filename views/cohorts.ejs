@@ -1,0 +1,20 @@
+<%- include('./partials/header') %>
+
+<form action="/contact" method="POST">
+    
+    <div class="mb-3">
+      <label for="teamCount" class="form-label">Method</label>
+      <input type="radio" name="teamCount" id="teamCount">Team Count</input>
+     
+      <input type="radio" name="numberPerTeam" id="numberPerTeam">Number Per Team</input>
+      </div>
+    <div class="mb-3">
+        <label for="Members" class="form-label">Members</label>
+        <textArea name="Members" class="form-control" id="Members" placeholder="Kevin Malone, Phillys Vance, Kelly Kapoor, Moose shrute "type="text"></textArea>
+      </div>
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+
+<%- include('./partials/footer') %>
