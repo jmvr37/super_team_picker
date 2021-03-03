@@ -1,0 +1,35 @@
+<%- include('./partials/header') %>
+  <% const {id, logo, cohort_name, cohort_members} = cohort %>
+
+  <form action="/cohorts/<%= id %>" method="POST">
+  <input type="hidden" name="_method" value="PATCH">
+
+    <div class="mb-3">
+      <label for="logo" class="form-label">New Logo</label>
+      <input name="logo" type="text" class="form-control" id="logo" placeholder="<%= logo %>">
+    </div>
+
+    <div class="mb-3">
+      <label for="name" class="form-label">New Name</label>
+      <input name="cohort_name" type="text" class="form-control" id="cohort_name" placeholder="<%= cohort_name %>">
+    </div>
+
+    <div class="mb-3">
+      <label for="members" class="form-label">New Team Members</label>
+      <textarea name="cohort_members" class="form-control" id="cohort_members" rows="3" placeholder="<%= cohort_members %>"=>
+          <%= cohort_members %>
+        </textarea>
+    </div>
+
+    <form class="mt-2" action="/cohorts/<%= id %>" method="POST">
+      <button type="submit" class="btn">Confirm Edit</button>
+    </form>
+    <form class="mt-2" action="/cohorts/<%= id %>" method="POST">
+      <input type="hidden" name="_method" value="DELETE">
+      <a href="/cohorts/<%= id %>/edit" class="btn btn-warning">Edit</a>
+      <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+  </form>
+
+
+<%- include('./partials/footer') %>
