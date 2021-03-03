@@ -4,20 +4,52 @@
 <h1><%= cohort_name %></h1>
 <p><%= cohort_members %></p>
 
-<form action="/contact" method="POST">
+<form action="/cohorts/<%= id %>">
 
   <div class="mb-3">
     <label for="teamCount" class="form-label">Method</label>
-    <input type="radio" name="teamCount" id="teamCount">Team Count</input>
 
-    <input type="radio" name="numberPerTeam" id="numberPerTeam">Number Per Team</input>
-    <input type="number" name="quantity" id="quantity">Quantity</input>
+    <div>
+      <input type="radio" id="" name="teamPicker" value="teamCount" >
+      <label for="teamCount">Team Count</label>
+      
+      <input type="radio" id="numberPerTeam" name="teamPicker" value="numberPerTeam" >
+      <label for="numberPerTeam">Number Per Team</label>
+    </div>
+
+    Quantity <input type="number" name="quantity" id="quantity" required/>
   </div>
 
-  <button type="submit" class="btn btn-primary">Assign Teams</button>
+  <form class="mt-2" action="/cohorts/<%= id %>" method="POST">
+    <button type="submit" class="btn btn-danger">Assign Teams</button>
+  </form>
 
-  <a href="/cohorts/<%= id %>/edit" class="btn btn-warning">Edit</a>
+  <div>
+    <a href="/cohorts/<%= id %>/edit" class="btn btn-warning">Edit</a>
+  </div>
 </form>
 
+<% if (teamPicker === 'teamCount') { %>
+  <p>team count</p>
+  <p>quantity: <%= quantity %></p>
+
+<% } else if (teamPicker === 'numberPerTeam') { %>
+  <p>number per team</p>
+
+  <% const splitNames=cohort_members.split(',') %>
+  <% const numberOfNames=splitNames.length %>
+  <% const emptyArr=[] %>
+  <% let names=[].concat(...splitNames) %>
+  <% while (names.length) { %>
+  <% emptyArr.push(names.splice(0, quantity)) %>
+  <% } %>
+  <% console.log(emptyArr) %>
+  <% splitNames.forEach(name=> { %>
+  <p>
+  <%= name %>
+  </p>
+  <% }) %>
+
+<% } %>
 
 <%- include('./partials/footer') %>

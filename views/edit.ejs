@@ -16,9 +16,7 @@
 
     <div class="mb-3">
       <label for="members" class="form-label">New Team Members</label>
-      <textarea name="cohort_members" class="form-control" id="cohort_members" rows="3" placeholder="<%= cohort_members %>"=>
-          <%= cohort_members %>
-        </textarea>
+      <textarea name="cohort_members" class="form-control" id="cohort_members" rows="3"></textarea>
     </div>
 
     <form class="mt-2" action="/cohorts/<%= id %>" method="POST">
