@@ -25,3 +25,14 @@ router.post('/cohorts', (request, response) => {
 })
 
 module.exports = router
+
+// app.get("/contact", (request, response) => {
+//   knex
+//     .select("*")
+//     .from("contacts")
+//     .then((data) => {
+//       // array of objects
+//       console.log(data);
+//       response.render("contact", { contacts: data });
+//     });
+// });
