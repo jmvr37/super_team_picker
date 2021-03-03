@@ -5,7 +5,7 @@ router.get('/newCohort', (request, response) => {
   response.render('newCohort')
 })
 
-router.post('/', (request, response) => {
+router.post('/cohorts', (request, response) => {
   const {logo, cohort_name, cohort_members} = request.body
 
   knex('cohorts')
@@ -19,8 +19,20 @@ router.post('/', (request, response) => {
     )
     .then(data => {
       console.log(data)
-      response.send(data)
+      console.log(response)
+      // response.redirect('/cohorts')
     })
 })
 
 module.exports = router
+
+// app.get("/contact", (request, response) => {
+//   knex
+//     .select("*")
+//     .from("contacts")
+//     .then((data) => {
+//       // array of objects
+//       console.log(data);
+//       response.render("contact", { contacts: data });
+//     });
+// });
