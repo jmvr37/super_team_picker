@@ -64,7 +64,7 @@ app.post('/cohort', (request, response) => {
     )
     .then(data => {
       response.send(data)
-      response.redirect('/cohort')
+      response.redirect('/cohorts')
     })
 })
 //
@@ -74,7 +74,7 @@ app.get('/cohorts/:id', (request, response) => {
   const teamPicker = request.query.teamPicker
   const quantity = request.query.quantity
 
-  response
+  // response
 
   knex('cohorts')
     .where('id', id)

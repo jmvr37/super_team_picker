@@ -20,34 +20,60 @@
     Quantity <input type="number" name="quantity" id="quantity" required/>
   </div>
 
-  <form class="mt-2" action="/cohorts/<%= id %>" method="POST">
-    <button type="submit" class="btn btn-danger">Assign Teams</button>
-  </form>
+  <button type="submit" class="btn btn-danger">Assign Teams</button>
 
   <div>
     <a href="/cohorts/<%= id %>/edit" class="btn btn-warning">Edit</a>
   </div>
 </form>
 
+<% const splitNames=cohort_members.split(',') %>
+<% const numberOfNames=splitNames.length %>
+
 <% if (teamPicker === 'teamCount') { %>
-  <p>team count</p>
-  <p>quantity: <%= quantity %></p>
+
+  <%
+    function shuffle(array) {
+    let counter = array.length;
+
+    // While there are elements in the array
+    while (counter > 0) {
+        // Pick a random index
+        let index = Math.floor(Math.random() * counter);
+
+        // Decrease counter by 1
+        counter--;
+
+        // And swap the last element with it
+        let temp = array[counter];
+        array[counter] = array[index];
+        array[index] = temp;
+    }
+
+    return array;
+    }
+  %>
+
+  <% let shuffledArr = shuffle(splitNames) %>
+  <% let numberPerTeam = Math.floor(shuffledArr.length / quantity) %>
+  <p>team count: <%= numberPerTeam %></p>
+  <% for (let i = 0; i < quantity; i++) { %>
+    <p>
+      <%= shuffledArr.splice(0, numberPerTeam) %>
+    </p>
+  <% } %>
 
 <% } else if (teamPicker === 'numberPerTeam') { %>
-  <p>number per team</p>
 
-  <% const splitNames=cohort_members.split(',') %>
-  <% const numberOfNames=splitNames.length %>
   <% const emptyArr=[] %>
   <% let names=[].concat(...splitNames) %>
+
   <% while (names.length) { %>
   <% emptyArr.push(names.splice(0, quantity)) %>
   <% } %>
   <% console.log(emptyArr) %>
-  <% splitNames.forEach(name=> { %>
-  <p>
-  <%= name %>
-  </p>
+  <% emptyArr.forEach(team => { %>
+    <p><%= team.join(",") %></p>
   <% }) %>
 
 <% } %>
