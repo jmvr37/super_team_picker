@@ -5,7 +5,7 @@ router.get('/newCohort', (request, response) => {
   response.render('newCohort')
 })
 
-router.post('/', (request, response) => {
+router.post('/cohorts', (request, response) => {
   const {logo, cohort_name, cohort_members} = request.body
 
   knex('cohorts')
@@ -19,7 +19,8 @@ router.post('/', (request, response) => {
     )
     .then(data => {
       console.log(data)
-      response.send(data)
+      console.log(response)
+      // response.redirect('/cohorts')
     })
 })
 

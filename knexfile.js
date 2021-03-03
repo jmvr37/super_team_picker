@@ -7,4 +7,8 @@ module.exports = {
       database: 'super_team_picker',
     },
   },
+  migrations: {
+    tableName: 'migrations',
+    directory: './db/migrations',
+  },
 }

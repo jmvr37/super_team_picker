@@ -17,4 +17,22 @@
   </form>
 
 
+  <div class="list-group">
+    <h1>cohorts</h1>
+    <% cohorts.forEach(cohort => { %>
+    <a
+      href="#"
+      class="list-group-item list-group-item-action"
+      aria-current="true"
+    >
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1"><%= cohort.cohort_name %></h5>
+      </div>
+      <p class="mb-1"><%= cohort.name %></p>
+      <small>By <%= cohort.cohort_members %></small>
+    </a>
+    <% }) %>
+  </div>
+
+
 <%- include('./partials/footer') %>
