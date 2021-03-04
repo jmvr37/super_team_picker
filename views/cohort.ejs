@@ -4,20 +4,78 @@
 <h1><%= cohort_name %></h1>
 <p><%= cohort_members %></p>
 
-<form action="/contact" method="POST">
+<form action="/cohorts/<%= id %>">
 
   <div class="mb-3">
     <label for="teamCount" class="form-label">Method</label>
-    <input type="radio" name="teamCount" id="teamCount">Team Count</input>
 
-    <input type="radio" name="numberPerTeam" id="numberPerTeam">Number Per Team</input>
-    <input type="number" name="quantity" id="quantity">Quantity</input>
+    <div>
+      <input type="radio" id="" name="teamPicker" value="teamCount" >
+      <label for="teamCount">Team Count</label>
+      
+      <input type="radio" id="numberPerTeam" name="teamPicker" value="numberPerTeam" >
+      <label for="numberPerTeam">Number Per Team</label>
+    </div>
+
+    Quantity <input type="number" name="quantity" id="quantity" required/>
   </div>
 
-  <button type="submit" class="btn btn-primary">Assign Teams</button>
+  <button type="submit" class="btn btn-danger">Assign Teams</button>
 
-  <a href="/cohorts/<%= id %>/edit" class="btn btn-warning">Edit</a>
+  <div>
+    <a href="/cohorts/<%= id %>/edit" class="btn btn-warning">Edit</a>
+  </div>
 </form>
 
+<% const splitNames=cohort_members.split(',') %>
+<% const numberOfNames=splitNames.length %>
+
+<% if (teamPicker === 'teamCount') { %>
+
+  <%
+    function shuffle(array) {
+    let counter = array.length;
+
+    // While there are elements in the array
+    while (counter > 0) {
+        // Pick a random index
+        let index = Math.floor(Math.random() * counter);
+
+        // Decrease counter by 1
+        counter--;
+
+        // And swap the last element with it
+        let temp = array[counter];
+        array[counter] = array[index];
+        array[index] = temp;
+    }
+
+    return array;
+    }
+  %>
+
+  <% let shuffledArr = shuffle(splitNames) %>
+  <% let numberPerTeam = Math.floor(shuffledArr.length / quantity) %>
+  <p>team count: <%= numberPerTeam %></p>
+  <% for (let i = 0; i < quantity; i++) { %>
+    <p>
+      <%= shuffledArr.splice(0, numberPerTeam) %>
+    </p>
+  <% } %>
+
+<% } else if (teamPicker === 'numberPerTeam') { %>
+
+  <% const emptyArr=[] %>
+  <% let names=[].concat(...splitNames) %>
+
+  <% while (names.length) { %>
+  <% emptyArr.push(names.splice(0, quantity)) %>
+  <% } %>
+  <% console.log(emptyArr) %>
+  <% emptyArr.forEach(team => { %>
+    <p><%= team.join(",") %></p>
+  <% }) %>
+
+<% } %>
 
 <%- include('./partials/footer') %>

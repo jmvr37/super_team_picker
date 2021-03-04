@@ -7,9 +7,11 @@ const app = express()
 // const cohortsRouter = require('./routes/cohorts')
 const knex = require('./db/client')
 const methodOverride = require('method-override')
+const bodyParser = require('body-parser')
 
 app.set('view engine', 'ejs')
 app.use(logger('dev'))
+app.use(bodyParser.urlencoded({extended: true}))
 app.use(cookieParser())
 
 app.use(express.urlencoded({extended: false}))
@@ -62,24 +64,24 @@ app.post('/cohort', (request, response) => {
     )
     .then(data => {
       response.send(data)
-      response.redirect('/cohort')
+      response.redirect('/cohorts')
     })
 })
 //
 
 app.get('/cohorts/:id', (request, response) => {
   const id = request.params.id
+  const teamPicker = request.query.teamPicker
+  const quantity = request.query.quantity
 
-  console.log(`REQ PARAMS: ${request.params.id}`)
-  console.log(`ID: ${id}`)
-  response
+  // response
 
   knex('cohorts')
     .where('id', id)
     .first()
     .then(cohort => {
       if (cohort) {
-        response.render('cohort', {cohort})
+        response.render('cohort', {cohort, teamPicker, quantity})
       } else {
         response.send('cannot find')
       }
